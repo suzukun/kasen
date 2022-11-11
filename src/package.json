@@ -1,0 +1,7 @@
+{
+  "name": "com.suzukun.kasen",
+  "displayName": "Kasen",
+  "description": "C# utility library.",
+  "version": "1.2.0",
+  "unity": "2021.3"
+}
