@@ -1,0 +1,33 @@
+#pragma warning disable SA1300, SA1649
+namespace KasenCS
+{
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// __
+    /// </summary>
+    public static partial class __
+    {
+        public static List<List<T>> Chunk<T>(List<T> list, int size = 1)
+        {
+            List<List<T>> result = new List<List<T>>();
+            int s = Math.Max(1, size);
+
+            Each(list, (v, i) =>
+            {
+                int index = i / s;
+
+                if (result.Count <= index)
+                {
+                    result.Add(new List<T>());
+                }
+
+                result[index].Add(v);
+            });
+
+            return result;
+        }
+    }
+}
+#pragma warning restore SA1300, SA1649
