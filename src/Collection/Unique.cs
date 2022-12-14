@@ -8,19 +8,11 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Union<T>(List<T> a, List<T> b)
+        public static List<T> Unique<T>(List<T> list)
         {
             List<T> result = new List<T>();
 
-            Each(a, v =>
-            {
-                if (!Includes(result, v))
-                {
-                    result.Add(v);
-                }
-            });
-
-            Each(b, v =>
+            Each(list, v =>
             {
                 if (!Includes(result, v))
                 {
