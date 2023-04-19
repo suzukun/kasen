@@ -9,203 +9,61 @@ https://github.com/suzukun/kasen.git?path=src
 
 ## NEW
 
+### Another
+
+#### Verify(params (bool, T)[] array)
+タプル配列を順番に確認し最初に見つけたItem1がtrueになっている要素のItem2を返します。
+##### Example
+```cs
+__.Verify((false, "A"), (true, "B"), (false, "C"));
+// => "B"
+```
+---
+
 ### Collection
 
-#### Compact(List list)
-配列から0、空文字、nullを除いた新しい配列を返します。
+#### MultiEach(int xLength, int yLength, Action callback)
+各次元指定した回数を繰り返し処理します。
 ##### Example
 ```cs
-List<string> list = new List<string>(){ "A", "B", "", "C" };
-
-__.Compact(list);
-// => ["A", "B", "C"]
-```
----
-
-#### Count((List | Dictionary) collection, Func callback)
-配列・辞書に指定したテストを実行し、合格した要素の数を返します。
-##### Example
-```cs
-List<int> list = new List<int>(){ 0, 2, 4, 6, 8 };
-
-__.Count(list, (value, index, self) =>
+__.MultiEach(10, 10, (x, y) =>
 {
-  return value >= 2;
+  // (0, 0)
+  // (1, 0)
+  // ...
+  // (9, 9)
 });
-// => 4
-```
----
-
-#### Difference(List list1, List list2)
-比較対象の配列に含まれていない要素のみを含む新しい配列を返します。
-##### Example
-```cs
-List<string> list1 = new List<string>(){ "A", "B" };
-List<string> list2 = new List<string>(){ "A", "C" };
-
-__.Difference(list1, list2);
-// => ["B"]
-```
----
-
-#### Intersection(List list1, List list2)
-比較対象の配列に含まれている要素のみを含む新しい配列を返します。
-##### Example
-```cs
-List<string> list1 = new List<string>(){ "A", "B" };
-List<string> list2 = new List<string>(){ "A", "C" };
-
-__.Intersection(list1, list2);
-// => ["A"]
-```
----
-
-#### Shuffle(List list)
-シャッフルされた新しい配列を返します。
-##### Example
-```cs
-List<string> list = new List<string>(){ "A", "B", "C", "D" };
-
-__.Shuffle(list);
-// => ["D", "A", "C", "B"]
-```
----
-
-#### Slice(List list, int startIndex, int endIndex)
-配列の指定されたstartIndexから指定されたendIndexまでの要素を含んだ新しい要素を返します。
-##### Example
-```cs
-List<string> list = new List<string>(){ "A", "B", "C", "D" };
-
-__.Slice(list, 1, 2);
-// => ["B", "C"]
-
-__.Slice(list, 2, -1);
-// => ["C", "D"]
-```
----
-
-#### Union(List list1, List list2)
-2つの配列を結合した新しい配列を返します。
-##### Example
-```cs
-List<string> list1 = new List<string>(){ "A", "B" };
-List<string> list2 = new List<string>(){ "A", "C" };
-
-__.Union(list1, list2);
-// => ["A", "B", "C"]
-```
----
-
-#### Unique(List list)
-重複のない新しい配列を返します。
-##### Example
-```cs
-List<string> list = new List<string>(){ "A", "B", "A", "C" };
-
-__.Unique(list);
-// => ["A", "B", "C"]
-```
----
-
-#### Unzip(List list)
-タプル配列を2つに分割した新しい配列を返します。
-##### Example
-```cs
-List<(string, int)> list = new List<(string, int)>()
-{
-  ("A", 0),
-  ("B", 2),
-  ("C", 4),
-};
-
-__.Unzip(list);
-// => (["A", "B", "C"], [0, 2, 4])
-```
----
-
-#### Xor(List list1, List list2)
-2つの配列から片方にしか存在しない値のみを含む新しい配列を返します。
-##### Example
-```cs
-List<string> list1 = new List<string>(){ "A", "B" };
-List<string> list2 = new List<string>(){ "A", "C" };
-
-__.Xor(list1, list2);
-// => ["B", "C"]
-```
----
-
-#### Zip(List list)
-2つの配列から値をタプルにした新しい配列を返します。
-##### Example
-```cs
-List<string> list1 = new List<string>(){ "A", "B", "C" };
-List<int> list2 = new List<int>(){ 0, 2, 4 };
-
-__.Zip(list1, list2);
-// => [("A", 0), ("B", 2), ("C", 4)]
-```
----
-
-### Function
-
-#### Junction((List | Dictionary) collection)
-キーによって処理を変える関数を返します。
-##### Example
-```cs
-Func<string, int, int> func = __.Junction(
-  ("A", (int v) => v + v),
-  ("B", (int v) => v * v));
-
-func("A", 3);
-// => 6
-
-func("B", 3);
-// => 9
 ```
 ---
 
 ### Number
 
-#### RangeMapper(float value, int fromMin, int fromMax, int toMin, int toMax)
-指定した範囲の入力値を指定した範囲の出力値に変換します。
+#### Fract(float value)
+値の少数部を返します。
 ##### Example
 ```cs
-__.RangeMapper(0.5f, 0f, 1f, 0f, 10f);
-// => 5f
+__.Fract(1.5f);
+// => 0.5f
+```
+---
+
+#### Reciprocal(float value)
+値の逆数を返します。
+##### Example
+```cs
+__.Reciprocal(2f);
+// => 0.5f
 ```
 ---
 
 ### String
 
-#### CamelCase(string value, bool isUpper = false)
-文字列をキャメルケースに変換します。
+#### WordBreak(string value)
+文字列を単語毎に分割します。
 ##### Example
 ```cs
-__.CamelCase("a-bc-d");
-// => aBcD
-
-__.CamelCase("a-bc-d", true);
-// => ABcD
-```
----
-
-#### KebabCase(string value)
-文字列をケバブケースに変換します。
-##### Example
-```cs
-__.KebabCase("aBcD");
-// => a-bc-d
-```
----
-
-#### SnakeCase(string value)
-文字列をスネークケースに変換します。
-##### Example
-```cs
-__.SnakeCase("aBcD");
-// => a_bc_d
+__.WordBreak("aBcD");
+// => "a,Bc,D"
 ```
 ---
 
@@ -247,6 +105,43 @@ List<string> list2 = new List<string>(){ "C", "D" };
 
 __.Concat(list1, list2);
 // => ["A", "B", "C", "D"]
+```
+---
+
+#### Compact(List list)
+配列から0、空文字、nullを除いた新しい配列を返します。
+##### Example
+```cs
+List<string> list = new List<string>(){ "A", "B", "", "C" };
+
+__.Compact(list);
+// => ["A", "B", "C"]
+```
+---
+
+#### Count((List | Dictionary) collection, Func callback)
+配列・辞書に指定したテストを実行し、合格した要素の数を返します。
+##### Example
+```cs
+List<int> list = new List<int>(){ 0, 2, 4, 6, 8 };
+
+__.Count(list, (value, index, self) =>
+{
+  return value >= 2;
+});
+// => 4
+```
+---
+
+#### Difference(List list1, List list2)
+比較対象の配列に含まれていない要素のみを含む新しい配列を返します。
+##### Example
+```cs
+List<string> list1 = new List<string>(){ "A", "B" };
+List<string> list2 = new List<string>(){ "A", "C" };
+
+__.Difference(list1, list2);
+// => ["B"]
 ```
 ---
 
@@ -358,6 +253,18 @@ List<string> list = new List<string>(){ "A", "B", "C", "D" };
 
 __.Includes(list, "C");
 // => true
+```
+---
+
+#### Intersection(List list1, List list2)
+比較対象の配列に含まれている要素のみを含む新しい配列を返します。
+##### Example
+```cs
+List<string> list1 = new List<string>(){ "A", "B" };
+List<string> list2 = new List<string>(){ "A", "C" };
+
+__.Intersection(list1, list2);
+// => ["A"]
 ```
 ---
 
@@ -506,6 +413,31 @@ __.Set(dictionary, "C", 300);
 ```
 ---
 
+#### Shuffle(List list)
+シャッフルされた新しい配列を返します。
+##### Example
+```cs
+List<string> list = new List<string>(){ "A", "B", "C", "D" };
+
+__.Shuffle(list);
+// => ["D", "A", "C", "B"]
+```
+---
+
+#### Slice(List list, int startIndex, int endIndex)
+配列の指定されたstartIndexから指定されたendIndexまでの要素を含んだ新しい要素を返します。
+##### Example
+```cs
+List<string> list = new List<string>(){ "A", "B", "C", "D" };
+
+__.Slice(list, 1, 2);
+// => ["B", "C"]
+
+__.Slice(list, 2, -1);
+// => ["C", "D"]
+```
+---
+
 #### Some((List | Dictionary) collection, Func callback)
 配列・辞書に指定したテストを実行し、一つ以上合格するかをテストします。
 ##### Example
@@ -528,6 +460,45 @@ List<string> list = new List<string>(){ "A", "B", "C", "D" };
 
 __.ToString(list, "-");
 // => "A-B-C-D"
+```
+---
+
+#### Union(List list1, List list2)
+2つの配列を結合した新しい配列を返します。
+##### Example
+```cs
+List<string> list1 = new List<string>(){ "A", "B" };
+List<string> list2 = new List<string>(){ "A", "C" };
+
+__.Union(list1, list2);
+// => ["A", "B", "C"]
+```
+---
+
+#### Unique(List list)
+重複のない新しい配列を返します。
+##### Example
+```cs
+List<string> list = new List<string>(){ "A", "B", "A", "C" };
+
+__.Unique(list);
+// => ["A", "B", "C"]
+```
+---
+
+#### Unzip(List list)
+タプル配列を2つに分割した新しい配列を返します。
+##### Example
+```cs
+List<(string, int)> list = new List<(string, int)>()
+{
+  ("A", 0),
+  ("B", 2),
+  ("C", 4),
+};
+
+__.Unzip(list);
+// => (["A", "B", "C"], [0, 2, 4])
 ```
 ---
 
@@ -568,7 +539,47 @@ __.Without(list, "A", "C");
 ```
 ---
 
+#### Xor(List list1, List list2)
+2つの配列から片方にしか存在しない値のみを含む新しい配列を返します。
+##### Example
+```cs
+List<string> list1 = new List<string>(){ "A", "B" };
+List<string> list2 = new List<string>(){ "A", "C" };
+
+__.Xor(list1, list2);
+// => ["B", "C"]
+```
+---
+
+#### Zip(List list)
+2つの配列から値をタプルにした新しい配列を返します。
+##### Example
+```cs
+List<string> list1 = new List<string>(){ "A", "B", "C" };
+List<int> list2 = new List<int>(){ 0, 2, 4 };
+
+__.Zip(list1, list2);
+// => [("A", 0), ("B", 2), ("C", 4)]
+```
+---
+
 ### Function
+
+#### Junction((List | Dictionary) collection)
+キーによって処理を変える関数を返します。
+##### Example
+```cs
+Func<string, int, int> func = __.Junction(
+  ("A", (int v) => v + v),
+  ("B", (int v) => v * v));
+
+func("A", 3);
+// => 6
+
+func("B", 3);
+// => 9
+```
+---
 
 #### Memoize(Func callback)
 関数をメモ化します。
@@ -660,6 +671,15 @@ __.Range(5);
 ```
 ---
 
+#### RangeMapper(float value, int fromMin, int fromMax, int toMin, int toMax)
+指定した範囲の入力値を指定した範囲の出力値に変換します。
+##### Example
+```cs
+__.RangeMapper(0.5f, 0f, 1f, 0f, 10f);
+// => 5f
+```
+---
+
 #### Saturate(float value)
 値を0~1の範囲で切った値を返します。
 ##### Example
@@ -675,5 +695,37 @@ __.Saturate(1.1f);
 ```cs
 __.Step(0.5f, 0.8f);
 // => 1f
+```
+---
+
+### String
+
+#### CamelCase(string value, bool isUpper = false)
+文字列をキャメルケースに変換します。
+##### Example
+```cs
+__.CamelCase("a-bc-d");
+// => aBcD
+
+__.CamelCase("a-bc-d", true);
+// => ABcD
+```
+---
+
+#### KebabCase(string value)
+文字列をケバブケースに変換します。
+##### Example
+```cs
+__.KebabCase("aBcD");
+// => a-bc-d
+```
+---
+
+#### SnakeCase(string value)
+文字列をスネークケースに変換します。
+##### Example
+```cs
+__.SnakeCase("aBcD");
+// => a_bc_d
 ```
 ---

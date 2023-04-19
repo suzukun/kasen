@@ -25,6 +25,42 @@ namespace KasenCS
             });
         }
 
+        public static void Each<T>(T[] array, Action<T, int, T[]> callback)
+        {
+            int index = 0;
+
+            foreach (T value in array)
+            {
+                callback(value, index, array);
+
+                index++;
+            }
+        }
+
+        public static void Each<T>(T[] array, Action<T, int> callback)
+        {
+            Each(array, (v, i, a) =>
+            {
+                callback(v, i);
+            });
+        }
+
+        public static void Each<T>(T[] array, Action<T> callback)
+        {
+            Each(array, (v, i, a) =>
+            {
+                callback(v);
+            });
+        }
+
+        public static void Each<T>(T[] array, Action callback)
+        {
+            Each(array, (v, i, a) =>
+            {
+                callback();
+            });
+        }
+
         public static void Each<TK, TV>(Dictionary<TK, TV> dictionary, Action<TV, TK, Dictionary<TK, TV>> callback)
         {
             foreach (KeyValuePair<TK, TV> item in dictionary)

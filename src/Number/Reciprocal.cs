@@ -6,7 +6,10 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static readonly string VERSION = "1.4.0";
+        public static float Reciprocal(float x)
+        {
+            return 1f / x;
+        }
     }
 }
 #pragma warning restore SA1300, SA1649

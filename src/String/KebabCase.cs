@@ -15,14 +15,8 @@ namespace KasenCS
                 return string.Empty;
             }
 
-            string joined = Regex.Replace(value, @"[A-Z]+", (match) =>
-            {
-                string result = "-" + match.Value;
-
-                return match.Result(result);
-            });
-            string middle = Regex.Replace(joined, @"(^(-|_|\s)+|(-|_|\s)+$)", string.Empty);
-            string replaced = Regex.Replace(middle, @"(-|_|\s)+", "-").ToLower();
+            string values = WordBreak(value);
+            string replaced = Regex.Replace(values, @",", "-").ToLower();
 
             return replaced;
         }

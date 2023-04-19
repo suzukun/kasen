@@ -8,23 +8,24 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static string CamelCase(string value, bool isUpper = false)
+        public static string WordBreak(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
                 return string.Empty;
             }
 
-            string values = WordBreak(value);
-            string replaced = Regex.Replace(values, @",.", (match) =>
+            string processed = value;
+
+            processed = Regex.Replace(processed, @"([A-Z]|-|_|\s|,)+", (match) =>
             {
-                string result = match.Value.Substring(match.Length - 1).ToUpper();
+                string result = Regex.Replace("," + match.Value, @"(-|_|\s|,)+", ",");
 
                 return match.Result(result);
             });
-            string first = replaced.Substring(0, 1);
+            processed = Regex.Replace(processed, @"(^,+|,+$)", string.Empty);
 
-            return (isUpper ? first.ToUpper() : first.ToLower()) + replaced.Substring(1);
+            return processed;
         }
     }
 }
