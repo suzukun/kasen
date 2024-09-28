@@ -1,87 +1,13 @@
 Kasen
 ===
 
-C# utility library.
+Unity utility library.
 
 ```
 https://github.com/suzukun/kasen.git?path=src
 ```
 
-## NEW
-
-### Another
-
-#### Verify(params (bool, T)[] array)
-タプル配列を順番に確認し最初に見つけたItem1がtrueになっている要素のItem2を返します。
-##### Example
-```cs
-__.Verify((false, "A"), (true, "B"), (false, "C"));
-// => "B"
-```
----
-
-### Collection
-
-#### MultiEach(int xLength, int yLength, Action callback)
-各次元指定した回数を繰り返し処理します。
-##### Example
-```cs
-__.MultiEach(10, 10, (x, y) =>
-{
-  // (0, 0)
-  // (1, 0)
-  // ...
-  // (9, 9)
-});
-```
----
-
-### Number
-
-#### Fract(float value)
-値の少数部を返します。
-##### Example
-```cs
-__.Fract(1.5f);
-// => 0.5f
-```
----
-
-#### Reciprocal(float value)
-値の逆数を返します。
-##### Example
-```cs
-__.Reciprocal(2f);
-// => 0.5f
-```
----
-
-### String
-
-#### WordBreak(string value)
-文字列を単語毎に分割します。
-##### Example
-```cs
-__.WordBreak("aBcD");
-// => "a,Bc,D"
-```
----
-
 ## Documentation
-
-### Another
-
-#### UniqueId()
-ユニークなIDを返します。
-##### Example
-```cs
-__.UniqueId();
-// => 0
-
-__.UniqueId();
-// => 1
-```
----
 
 ### Collection
 
@@ -329,6 +255,20 @@ __.MapValues(list, (value, index, self) =>
   return value + value;
 });
 // => { 0: "AA", 1: "BB", 2: "CC", 3: "DD" }
+```
+---
+
+#### MultiEach(int xLength, int yLength, Action callback)
+各次元指定した回数を繰り返し処理します。
+##### Example
+```cs
+__.MultiEach(10, 10, (x, y) =>
+{
+  // (0, 0)
+  // (1, 0)
+  // ...
+  // (9, 9)
+});
 ```
 ---
 
@@ -644,6 +584,15 @@ __.TAU;
 ```
 ---
 
+#### Fract(float value)
+値の少数部を返します。
+##### Example
+```cs
+__.Fract(1.5f);
+// => 0.5f
+```
+---
+
 #### InRange(float value, float min, float max)
 値が指定した最小値・最大値の範囲に含まれているかをテストします。
 ##### Example
@@ -677,6 +626,15 @@ __.Range(5);
 ```cs
 __.RangeMapper(0.5f, 0f, 1f, 0f, 10f);
 // => 5f
+```
+---
+
+#### Reciprocal(float value)
+値の逆数を返します。
+##### Example
+```cs
+__.Reciprocal(2f);
+// => 0.5f
 ```
 ---
 
@@ -727,5 +685,129 @@ __.KebabCase("aBcD");
 ```cs
 __.SnakeCase("aBcD");
 // => a_bc_d
+```
+---
+
+#### WordBreak(string value)
+文字列を単語毎に分割します。
+##### Example
+```cs
+__.WordBreak("aBcD");
+// => "a,Bc,D"
+```
+---
+
+### Unity/Attributes
+
+#### \[Invokable\]
+指定したメソッドを呼び出すボタンをインスペクターに追加します。
+
+---
+
+#### \[Label(string text)\]
+指定したプロパティのインスペクターでの表示名を指定します。
+
+---
+
+#### \[ReadOnly\]
+指定したプロパティのインスペクターでの変更を無効化します。
+
+---
+
+### Unity/Common
+
+#### Log(string message)
+---
+
+#### LogError(string message)
+---
+
+#### LogInfo(string message)
+---
+
+#### LogWarning(string message)
+---
+
+#### Styled
+装飾タグが付与された文字列を返します。
+##### Example
+```cs
+__.Styled.Bold.Red.Text("Text");
+```
+---
+
+#### StyledText(string text)
+装飾タグが付与された文字列を返します。
+##### Example
+```cs
+__.StyledText("Text").Bold.Red.Value;
+```
+---
+
+#### Tween
+---
+
+### Unity/Components
+
+#### DraggableUI
+---
+
+#### SoundManager\<T\>
+---
+
+### Util
+
+#### new Clock()
+---
+
+#### new EventEmitter\<T\>()
+---
+
+#### new Observe\<T\>(T defaultValue)
+---
+
+#### Promise\<T\>(Action action)
+---
+
+#### PromiseAll\<T\>(params Task[] tasks)
+---
+
+#### PromiseRace\<T\>(params Task[] tasks)
+---
+
+#### UniqueId()
+ユニークなIDを返します。
+##### Example
+```cs
+__.UniqueId();
+// => 0
+
+__.UniqueId();
+// => 1
+```
+---
+
+#### Verify(params (bool, T)[] array)
+タプル配列を順番に確認し最初に見つけたItem1がtrueになっている要素のItem2を返します。
+##### Example
+```cs
+__.Verify((false, "A"), (true, "B"), (false, "C"));
+// => "B"
+```
+---
+
+#### Wait(float seconds)
+指定した秒数待機します。
+##### Example
+```cs
+await __.Wait(1f);
+```
+---
+
+#### WaitOneFrame()
+1フレーム待機します。
+##### Example
+```cs
+await __.WaitOneFrame();
 ```
 ---

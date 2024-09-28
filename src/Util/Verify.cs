@@ -10,14 +10,13 @@ namespace KasenCS
         {
             T result = default;
 
-            foreach ((bool isSuccessed, T value) in array)
+            Each(array, (e) =>
             {
-                if (isSuccessed)
+                if (e.Item1)
                 {
-                    result = value;
-                    break;
+                    result = e.Item2;
                 }
-            }
+            });
 
             return result;
         }
