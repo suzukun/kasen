@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static T First<T>(List<T> list)
+        public static T First<T>(IList<T> list)
         {
             return list[0];
         }

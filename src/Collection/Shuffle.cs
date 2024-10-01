@@ -8,11 +8,11 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Shuffle<T>(List<T> list)
+        public static List<T> Shuffle<T>(IList<T> list)
         {
-            List<T> result = new List<T>(list);
+            List<T> result = new(list);
 
-            Each(result.Count, () =>
+            Each(result.Count, (_) =>
             {
                 int from = Random(result.Count - 1);
                 int to = Random(result.Count - 1);

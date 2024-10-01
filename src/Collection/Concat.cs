@@ -8,29 +8,29 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static Dictionary<TK, TV> Concat<TK, TV>(params Dictionary<TK, TV>[] dictionaries)
+        public static Dictionary<TK, TV> Concat<TK, TV>(params IDictionary<TK, TV>[] dictionaries)
         {
-            Dictionary<TK, TV> result = new Dictionary<TK, TV>();
+            Dictionary<TK, TV> result = new();
 
-            foreach (Dictionary<TK, TV> dictionary in dictionaries)
+            Each(dictionaries, (dictionary) =>
             {
                 Each(dictionary, (v, k) =>
                 {
                     Set(result, k, v);
                 });
-            }
+            });
 
             return result;
         }
 
-        public static List<T> Concat<T>(params List<T>[] lists)
+        public static List<T> Concat<T>(params IList<T>[] lists)
         {
-            List<T> result = new List<T>();
+            List<T> result = new();
 
-            foreach (List<T> list in lists)
+            Each(lists, (list) =>
             {
                 result.AddRange(list);
-            }
+            });
 
             return result;
         }

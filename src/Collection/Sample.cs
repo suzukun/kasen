@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static KeyValuePair<TK, TV> Sample<TK, TV>(Dictionary<TK, TV> dictionary)
+        public static KeyValuePair<TK, TV> Sample<TK, TV>(IDictionary<TK, TV> dictionary)
         {
             if (dictionary.Count == 0)
             {
@@ -24,7 +24,7 @@ namespace KasenCS
             return new KeyValuePair<TK, TV>(key, dictionary[key]);
         }
 
-        public static T Sample<T>(List<T> list)
+        public static T Sample<T>(IList<T> list)
         {
             return list.Count == 0 ? default : list[Random(0, list.Count - 1)];
         }

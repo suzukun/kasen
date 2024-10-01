@@ -8,14 +8,14 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static Dictionary<TK, TV> Fill<TK, TV>(Dictionary<TK, TV> dictionary, TV value)
+        public static Dictionary<TK, TV> Fill<TK, TV>(IDictionary<TK, TV> dictionary, TV value)
         {
-            return MapValues(dictionary, () => value);
+            return MapValues(dictionary, (_) => value);
         }
 
-        public static List<T> Fill<T>(List<T> list, T value)
+        public static List<T> Fill<T>(IList<T> list, T value)
         {
-            return Map(list, () => value);
+            return Map(list, (_) => value);
         }
     }
 }

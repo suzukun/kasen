@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Difference<T>(List<T> a, List<T> b)
+        public static List<T> Difference<T>(IList<T> a, IList<T> b)
         {
             List<T> result = Filter(a, (v) => !Includes(b, v));
 

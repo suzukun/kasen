@@ -6,7 +6,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static readonly string VERSION = "1.5.0";
+        public static readonly string VERSION = "1.5.1";
     }
 }
 #pragma warning restore SA1300, SA1649

@@ -9,13 +9,13 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static int Count<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, bool> callback)
+        public static int Count<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
         {
             int result = 0;
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                bool isTarget = callback(v, k, d);
+                bool isTarget = callback(v, k);
 
                 if (isTarget)
                 {
@@ -26,23 +26,18 @@ namespace KasenCS
             return result;
         }
 
-        public static int Count<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
+        public static int Count<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, bool> callback)
         {
-            return Count(dictionary, (v, k, d) => callback(v, k));
+            return Count(dictionary, (v, k) => callback(v));
         }
 
-        public static int Count<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, bool> callback)
-        {
-            return Count(dictionary, (v, k, d) => callback(v));
-        }
-
-        public static int Count<T>(List<T> list, Func<T, int, List<T>, bool> callback)
+        public static int Count<T>(IList<T> list, Func<T, int, bool> callback)
         {
             int result = 0;
 
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                bool isTarget = callback(v, i, a);
+                bool isTarget = callback(v, i);
 
                 if (isTarget)
                 {
@@ -53,14 +48,9 @@ namespace KasenCS
             return result;
         }
 
-        public static int Count<T>(List<T> list, Func<T, int, bool> callback)
+        public static int Count<T>(IList<T> list, Func<T, bool> callback)
         {
-            return Count(list, (v, i, a) => callback(v, i));
-        }
-
-        public static int Count<T>(List<T> list, Func<T, bool> callback)
-        {
-            return Count(list, (v, i, a) => callback(v));
+            return Count(list, (v, i) => callback(v));
         }
     }
 }

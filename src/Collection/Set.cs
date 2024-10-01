@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static void Set<TK, TV>(Dictionary<TK, TV> dictionary, TK key, TV value)
+        public static void Set<TK, TV>(IDictionary<TK, TV> dictionary, TK key, TV value)
         {
             if (dictionary.ContainsKey(key))
             {

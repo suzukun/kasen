@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static T Last<T>(List<T> list)
+        public static T Last<T>(IList<T> list)
         {
             return list[^1];
         }

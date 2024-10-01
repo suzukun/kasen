@@ -9,48 +9,38 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static bool Some<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, bool> callback)
+        public static bool Some<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
         {
             bool result = false;
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                result |= callback(v, k, d);
+                result |= callback(v, k);
             });
 
             return result;
         }
 
-        public static bool Some<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
+        public static bool Some<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, bool> callback)
         {
-            return Some(dictionary, (v, k, d) => callback(v, k));
+            return Some(dictionary, (v, k) => callback(v));
         }
 
-        public static bool Some<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, bool> callback)
-        {
-            return Some(dictionary, (v, k, d) => callback(v));
-        }
-
-        public static bool Some<T>(List<T> list, Func<T, int, List<T>, bool> callback)
+        public static bool Some<T>(IList<T> list, Func<T, int, bool> callback)
         {
             bool result = false;
 
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                result |= callback(v, i, a);
+                result |= callback(v, i);
             });
 
             return result;
         }
 
-        public static bool Some<T>(List<T> list, Func<T, int, bool> callback)
+        public static bool Some<T>(IList<T> list, Func<T, bool> callback)
         {
-            return Some(list, (v, i, a) => callback(v, i));
-        }
-
-        public static bool Some<T>(List<T> list, Func<T, bool> callback)
-        {
-            return Some(list, (v, i, a) => callback(v));
+            return Some(list, (v, i) => callback(v));
         }
     }
 }

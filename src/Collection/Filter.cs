@@ -9,13 +9,13 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static Dictionary<TK, TV> Filter<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, bool> callback)
+        public static Dictionary<TK, TV> Filter<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
         {
-            Dictionary<TK, TV> result = new Dictionary<TK, TV>();
+            Dictionary<TK, TV> result = new();
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                bool isTarget = callback(v, k, d);
+                bool isTarget = callback(v, k);
 
                 if (isTarget)
                 {
@@ -26,23 +26,18 @@ namespace KasenCS
             return result;
         }
 
-        public static Dictionary<TK, TV> Filter<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
+        public static Dictionary<TK, TV> Filter<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, bool> callback)
         {
-            return Filter(dictionary, (v, k, d) => callback(v, k));
+            return Filter(dictionary, (v, k) => callback(v));
         }
 
-        public static Dictionary<TK, TV> Filter<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, bool> callback)
+        public static List<T> Filter<T>(IList<T> list, Func<T, int, bool> callback)
         {
-            return Filter(dictionary, (v, k, d) => callback(v));
-        }
+            List<T> result = new();
 
-        public static List<T> Filter<T>(List<T> list, Func<T, int, List<T>, bool> callback)
-        {
-            List<T> result = new List<T>();
-
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                bool isTarget = callback(v, i, a);
+                bool isTarget = callback(v, i);
 
                 if (isTarget)
                 {
@@ -53,14 +48,9 @@ namespace KasenCS
             return result;
         }
 
-        public static List<T> Filter<T>(List<T> list, Func<T, int, bool> callback)
+        public static List<T> Filter<T>(IList<T> list, Func<T, bool> callback)
         {
-            return Filter(list, (v, i, a) => callback(v, i));
-        }
-
-        public static List<T> Filter<T>(List<T> list, Func<T, bool> callback)
-        {
-            return Filter(list, (v, i, a) => callback(v));
+            return Filter(list, (v, i) => callback(v));
         }
     }
 }

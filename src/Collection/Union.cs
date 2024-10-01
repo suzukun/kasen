@@ -8,9 +8,9 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Union<T>(List<T> a, List<T> b)
+        public static List<T> Union<T>(IList<T> a, IList<T> b)
         {
-            List<T> result = new List<T>();
+            List<T> result = new();
 
             Each(a, v =>
             {

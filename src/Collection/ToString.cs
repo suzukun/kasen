@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static string ToString<TK, TV>(Dictionary<TK, TV> dictionary, string separator = "\n")
+        public static string ToString<TK, TV>(IDictionary<TK, TV> dictionary, string separator = "\n")
         {
             string result = string.Empty;
 

@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<TV> Values<TK, TV>(Dictionary<TK, TV> dictionary)
+        public static List<TV> Values<TK, TV>(IDictionary<TK, TV> dictionary)
         {
             TV[] values = new TV[dictionary.Count];
 

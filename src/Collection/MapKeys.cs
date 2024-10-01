@@ -11,7 +11,7 @@ namespace KasenCS
     {
         public static Dictionary<T, int> MapKeys<T>(int size, Func<int, T> callback)
         {
-            Dictionary<T, int> result = new Dictionary<T, int>();
+            Dictionary<T, int> result = new();
 
             Each(size, (i) =>
             {
@@ -21,63 +21,38 @@ namespace KasenCS
             return result;
         }
 
-        public static Dictionary<T, int> MapKeys<T>(int size, Func<T> callback)
+        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
         {
-            return MapKeys(size, (i) => callback());
-        }
+            Dictionary<TR, TV> result = new();
 
-        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, TR> callback)
-        {
-            Dictionary<TR, TV> result = new Dictionary<TR, TV>();
-
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                Set(result, callback(v, k, d), v);
+                Set(result, callback(v, k), v);
             });
 
             return result;
         }
 
-        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
+        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TR> callback)
         {
-            return MapKeys(dictionary, (v, k, d) => callback(v, k));
+            return MapKeys(dictionary, (v, k) => callback(v));
         }
 
-        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TR> callback)
+        public static Dictionary<TR, TV> MapKeys<TV, TR>(IList<TV> list, Func<TV, int, TR> callback)
         {
-            return MapKeys(dictionary, (v, k, d) => callback(v));
-        }
+            Dictionary<TR, TV> result = new();
 
-        public static Dictionary<TR, TV> MapKeys<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR> callback)
-        {
-            return MapKeys(dictionary, (v, k, d) => callback());
-        }
-
-        public static Dictionary<TR, TV> MapKeys<TV, TR>(List<TV> list, Func<TV, int, List<TV>, TR> callback)
-        {
-            Dictionary<TR, TV> result = new Dictionary<TR, TV>();
-
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                Set(result, callback(v, i, a), v);
+                Set(result, callback(v, i), v);
             });
 
             return result;
         }
 
-        public static Dictionary<TR, TV> MapKeys<TV, TR>(List<TV> list, Func<TV, int, TR> callback)
+        public static Dictionary<TR, TV> MapKeys<TV, TR>(IList<TV> list, Func<TV, TR> callback)
         {
-            return MapKeys(list, (v, i, a) => callback(v, i));
-        }
-
-        public static Dictionary<TR, TV> MapKeys<TV, TR>(List<TV> list, Func<TV, TR> callback)
-        {
-            return MapKeys(list, (v, i, a) => callback(v));
-        }
-
-        public static Dictionary<TR, TV> MapKeys<TV, TR>(List<TV> list, Func<TR> callback)
-        {
-            return MapKeys(list, (v, i, a) => callback());
+            return MapKeys(list, (v, i) => callback(v));
         }
     }
 }

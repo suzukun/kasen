@@ -8,16 +8,16 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static Dictionary<TK, TV> Omit<TK, TV>(Dictionary<TK, TV> dictionary, params TK[] keys)
+        public static Dictionary<TK, TV> Omit<TK, TV>(IDictionary<TK, TV> dictionary, params TK[] keys)
         {
-            List<TK> targets = new List<TK>(keys);
+            List<TK> targets = new(keys);
 
             return Filter(dictionary, (v, k) => !Includes(targets, k));
         }
 
-        public static List<T> Omit<T>(List<T> dictionary, params int[] keys)
+        public static List<T> Omit<T>(IList<T> dictionary, params int[] keys)
         {
-            List<int> targets = new List<int>(keys);
+            List<int> targets = new(keys);
 
             return Filter(dictionary, (v, k) => !Includes(targets, k));
         }

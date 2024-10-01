@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static T Nth<T>(List<T> list, int index)
+        public static T Nth<T>(IList<T> list, int index)
         {
             int i = Clamp(index >= 0 ? index : list.Count + index, 0, list.Count - 1);
 

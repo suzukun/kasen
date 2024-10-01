@@ -11,7 +11,7 @@ namespace KasenCS
     {
         public static List<T> Map<T>(int size, Func<int, T> callback)
         {
-            List<T> result = new List<T>();
+            List<T> result = new();
 
             Each(size, (i) =>
             {
@@ -21,63 +21,38 @@ namespace KasenCS
             return result;
         }
 
-        public static List<T> Map<T>(int size, Func<T> callback)
+        public static List<TR> Map<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
         {
-            return Map(size, (i) => callback());
-        }
+            List<TR> result = new();
 
-        public static List<TR> Map<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, TR> callback)
-        {
-            List<TR> result = new List<TR>();
-
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                result.Add(callback(v, k, d));
+                result.Add(callback(v, k));
             });
 
             return result;
         }
 
-        public static List<TR> Map<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
+        public static List<TR> Map<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TR> callback)
         {
-            return Map(dictionary, (v, k, d) => callback(v, k));
+            return Map(dictionary, (v, k) => callback(v));
         }
 
-        public static List<TR> Map<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TR> callback)
+        public static List<TR> Map<TV, TR>(IList<TV> list, Func<TV, int, TR> callback)
         {
-            return Map(dictionary, (v, k, d) => callback(v));
-        }
+            List<TR> result = new();
 
-        public static List<TR> Map<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR> callback)
-        {
-            return Map(dictionary, (v, k, d) => callback());
-        }
-
-        public static List<TR> Map<TV, TR>(List<TV> list, Func<TV, int, List<TV>, TR> callback)
-        {
-            List<TR> result = new List<TR>();
-
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                result.Add(callback(v, i, a));
+                result.Add(callback(v, i));
             });
 
             return result;
         }
 
-        public static List<TR> Map<TV, TR>(List<TV> list, Func<TV, int, TR> callback)
+        public static List<TR> Map<TV, TR>(IList<TV> list, Func<TV, TR> callback)
         {
-            return Map(list, (v, i, a) => callback(v, i));
-        }
-
-        public static List<TR> Map<TV, TR>(List<TV> list, Func<TV, TR> callback)
-        {
-            return Map(list, (v, i, a) => callback(v));
-        }
-
-        public static List<TR> Map<TV, TR>(List<TV> list, Func<TR> callback)
-        {
-            return Map(list, (v, i, a) => callback());
+            return Map(list, (v, i) => callback(v));
         }
     }
 }

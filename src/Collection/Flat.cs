@@ -10,7 +10,14 @@ namespace KasenCS
     {
         public static List<T> Flat<T>(List<List<T>> lists)
         {
-            return Concat(lists.ToArray());
+            List<T> result = new();
+
+            Each(lists, (list) =>
+            {
+                result.AddRange(list);
+            });
+
+            return result;
         }
     }
 }

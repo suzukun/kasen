@@ -9,48 +9,38 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static bool Every<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, bool> callback)
+        public static bool Every<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
         {
             bool result = true;
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                result &= callback(v, k, d);
+                result &= callback(v, k);
             });
 
             return result;
         }
 
-        public static bool Every<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
+        public static bool Every<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, bool> callback)
         {
-            return Every(dictionary, (v, k, d) => callback(v, k));
+            return Every(dictionary, (v, k) => callback(v));
         }
 
-        public static bool Every<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, bool> callback)
-        {
-            return Every(dictionary, (v, k, d) => callback(v));
-        }
-
-        public static bool Every<T>(List<T> list, Func<T, int, List<T>, bool> callback)
+        public static bool Every<T>(IList<T> list, Func<T, int, bool> callback)
         {
             bool result = true;
 
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                result &= callback(v, i, a);
+                result &= callback(v, i);
             });
 
             return result;
         }
 
-        public static bool Every<T>(List<T> list, Func<T, int, bool> callback)
+        public static bool Every<T>(IList<T> list, Func<T, bool> callback)
         {
-            return Every(list, (v, i, a) => callback(v, i));
-        }
-
-        public static bool Every<T>(List<T> list, Func<T, bool> callback)
-        {
-            return Every(list, (v, i, a) => callback(v));
+            return Every(list, (v, i) => callback(v));
         }
     }
 }

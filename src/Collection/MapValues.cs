@@ -11,7 +11,7 @@ namespace KasenCS
     {
         public static Dictionary<int, T> MapValues<T>(int size, Func<int, T> callback)
         {
-            Dictionary<int, T> result = new Dictionary<int, T>();
+            Dictionary<int, T> result = new();
 
             Each(size, (i) =>
             {
@@ -21,63 +21,38 @@ namespace KasenCS
             return result;
         }
 
-        public static Dictionary<int, T> MapValues<T>(int size, Func<T> callback)
+        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
         {
-            return MapValues(size, (i) => callback());
-        }
+            Dictionary<TK, TR> result = new();
 
-        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, TR> callback)
-        {
-            Dictionary<TK, TR> result = new Dictionary<TK, TR>();
-
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                result.Add(k, callback(v, k, d));
+                result.Add(k, callback(v, k));
             });
 
             return result;
         }
 
-        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TK, TR> callback)
+        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TV, TR> callback)
         {
-            return MapValues(dictionary, (v, k, d) => callback(v, k));
+            return MapValues(dictionary, (v, k) => callback(v));
         }
 
-        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TV, TR> callback)
+        public static Dictionary<int, TR> MapValues<TV, TR>(IList<TV> list, Func<TV, int, TR> callback)
         {
-            return MapValues(dictionary, (v, k, d) => callback(v));
-        }
+            Dictionary<int, TR> result = new();
 
-        public static Dictionary<TK, TR> MapValues<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR> callback)
-        {
-            return MapValues(dictionary, (v, k, d) => callback());
-        }
-
-        public static Dictionary<int, TR> MapValues<TV, TR>(List<TV> list, Func<TV, int, List<TV>, TR> callback)
-        {
-            Dictionary<int, TR> result = new Dictionary<int, TR>();
-
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                result.Add(i, callback(v, i, a));
+                result.Add(i, callback(v, i));
             });
 
             return result;
         }
 
-        public static Dictionary<int, TR> MapValues<TV, TR>(List<TV> list, Func<TV, int, TR> callback)
+        public static Dictionary<int, TR> MapValues<TV, TR>(IList<TV> list, Func<TV, TR> callback)
         {
-            return MapValues(list, (v, i, a) => callback(v, i));
-        }
-
-        public static Dictionary<int, TR> MapValues<TV, TR>(List<TV> list, Func<TV, TR> callback)
-        {
-            return MapValues(list, (v, i, a) => callback(v));
-        }
-
-        public static Dictionary<int, TR> MapValues<TV, TR>(List<TV> list, Func<TR> callback)
-        {
-            return MapValues(list, (v, i, a) => callback());
+            return MapValues(list, (v, i) => callback(v));
         }
     }
 }

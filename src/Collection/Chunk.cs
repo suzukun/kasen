@@ -9,9 +9,9 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<List<T>> Chunk<T>(List<T> list, int size = 1)
+        public static List<List<T>> Chunk<T>(IList<T> list, int size = 1)
         {
-            List<List<T>> result = new List<List<T>>();
+            List<List<T>> result = new();
             int s = Math.Max(1, size);
 
             Each(list, (v, i) =>
@@ -20,7 +20,7 @@ namespace KasenCS
 
                 if (result.Count <= index)
                 {
-                    result.Add(new List<T>());
+                    result.Add(new());
                 }
 
                 result[index].Add(v);

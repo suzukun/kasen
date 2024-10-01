@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static (List<T1>, List<T2>) Unzip<T1, T2>(List<(T1, T2)> list)
+        public static (List<T1>, List<T2>) Unzip<T1, T2>(IList<(T1, T2)> list)
         {
             (List<T1>, List<T2>) result = (new List<T1>(), new List<T2>());
 

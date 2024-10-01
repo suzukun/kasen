@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Xor<T>(List<T> a, List<T> b)
+        public static List<T> Xor<T>(IList<T> a, IList<T> b)
         {
             List<T> result = Concat(Difference(a, b), Difference(b, a));
 

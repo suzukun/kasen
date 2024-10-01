@@ -8,12 +8,12 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static bool Includes<TK, TV>(Dictionary<TK, TV> dictionary, TK key, TV value)
+        public static bool Includes<TK, TV>(IDictionary<TK, TV> dictionary, TK key, TV value)
         {
             return dictionary.ContainsKey(key) && dictionary[key].Equals(value);
         }
 
-        public static bool Includes<T>(List<T> list, T value)
+        public static bool Includes<T>(IList<T> list, T value)
         {
             return list.Contains(value);
         }

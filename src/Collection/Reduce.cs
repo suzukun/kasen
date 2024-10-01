@@ -26,73 +26,48 @@ namespace KasenCS
             return Reduce(size, (r, i) => callback(r), initial);
         }
 
-        public static T Reduce<T>(int size, Func<T> callback, T initial = default)
-        {
-            return Reduce(size, (r, i) => callback(), initial);
-        }
-
-        public static TR Reduce<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR, TV, TK, Dictionary<TK, TV>, TR> callback, TR initial = default)
+        public static TR Reduce<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TR, TV, TK, TR> callback, TR initial = default)
         {
             TR result = initial;
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
-                result = callback(result, v, k, d);
+                result = callback(result, v, k);
             });
 
             return result;
         }
 
-        public static TR Reduce<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR, TV, TK, TR> callback, TR initial = default)
+        public static TR Reduce<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TR, TV, TR> callback, TR initial = default)
         {
-            return Reduce(dictionary, (r, v, k, d) => callback(r, v, k), initial);
+            return Reduce(dictionary, (r, v, k) => callback(r, v), initial);
         }
 
-        public static TR Reduce<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR, TV, TR> callback, TR initial = default)
+        public static TR Reduce<TK, TV, TR>(IDictionary<TK, TV> dictionary, Func<TR, TR> callback, TR initial = default)
         {
-            return Reduce(dictionary, (r, v, k, d) => callback(r, v), initial);
+            return Reduce(dictionary, (r, v, k) => callback(r), initial);
         }
 
-        public static TR Reduce<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR, TR> callback, TR initial = default)
-        {
-            return Reduce(dictionary, (r, v, k, d) => callback(r), initial);
-        }
-
-        public static TR Reduce<TK, TV, TR>(Dictionary<TK, TV> dictionary, Func<TR> callback, TR initial = default)
-        {
-            return Reduce(dictionary, (r, v, k, d) => callback(), initial);
-        }
-
-        public static TR Reduce<TV, TR>(List<TV> list, Func<TR, TV, int, List<TV>, TR> callback, TR initial = default)
+        public static TR Reduce<TV, TR>(IList<TV> list, Func<TR, TV, int, TR> callback, TR initial = default)
         {
             TR result = initial;
 
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
-                result = callback(result, v, i, a);
+                result = callback(result, v, i);
             });
 
             return result;
         }
 
-        public static TR Reduce<TV, TR>(List<TV> list, Func<TR, TV, int, TR> callback, TR initial = default)
+        public static TR Reduce<TV, TR>(IList<TV> list, Func<TR, TV, TR> callback, TR initial = default)
         {
-            return Reduce(list, (r, v, i, a) => callback(r, v, i), initial);
+            return Reduce(list, (r, v, i) => callback(r, v), initial);
         }
 
-        public static TR Reduce<TV, TR>(List<TV> list, Func<TR, TV, TR> callback, TR initial = default)
+        public static TR Reduce<TV, TR>(IList<TV> list, Func<TR, TR> callback, TR initial = default)
         {
-            return Reduce(list, (r, v, i, a) => callback(r, v), initial);
-        }
-
-        public static TR Reduce<TV, TR>(List<TV> list, Func<TR, TR> callback, TR initial = default)
-        {
-            return Reduce(list, (r, v, i, a) => callback(r), initial);
-        }
-
-        public static TR Reduce<TV, TR>(List<TV> list, Func<TR> callback, TR initial = default)
-        {
-            return Reduce(list, (v, i, a) => callback(), initial);
+            return Reduce(list, (r, v, i) => callback(r), initial);
         }
     }
 }

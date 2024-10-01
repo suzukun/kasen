@@ -17,110 +17,47 @@ namespace KasenCS
             }
         }
 
-        public static void Each(int size, Action callback)
+        public static void Each<T>(IList<T> list, Action<T, int> callback)
         {
-            Each(size, (i) =>
+            int i = 0;
+
+            foreach (T item in list)
             {
-                callback();
-            });
-        }
-
-        public static void Each<T>(T[] array, Action<T, int, T[]> callback)
-        {
-            int index = 0;
-
-            foreach (T value in array)
-            {
-                callback(value, index, array);
-
-                index++;
+                callback(item, i);
+                i++;
             }
         }
 
-        public static void Each<T>(T[] array, Action<T, int> callback)
+        public static void Each<T>(IList<T> list, Action<T> callback)
         {
-            Each(array, (v, i, a) =>
+            foreach (T item in list)
             {
-                callback(v, i);
-            });
+                callback(item);
+            }
         }
 
-        public static void Each<T>(T[] array, Action<T> callback)
-        {
-            Each(array, (v, i, a) =>
-            {
-                callback(v);
-            });
-        }
-
-        public static void Each<T>(T[] array, Action callback)
-        {
-            Each(array, (v, i, a) =>
-            {
-                callback();
-            });
-        }
-
-        public static void Each<TK, TV>(Dictionary<TK, TV> dictionary, Action<TV, TK, Dictionary<TK, TV>> callback)
+        public static void Each<TK, TV>(IDictionary<TK, TV> dictionary, Action<TV, TK> callback)
         {
             foreach (KeyValuePair<TK, TV> item in dictionary)
             {
-                callback(item.Value, item.Key, dictionary);
+                callback(item.Value, item.Key);
             }
         }
 
-        public static void Each<TK, TV>(Dictionary<TK, TV> dictionary, Action<TV, TK> callback)
+        public static void Each<TK, TV>(IDictionary<TK, TV> dictionary, Action<TV> callback)
         {
-            Each(dictionary, (v, k, d) =>
+            foreach (KeyValuePair<TK, TV> item in dictionary)
             {
-                callback(v, k);
-            });
+                callback(item.Value);
+            }
         }
 
-        public static void Each<TK, TV>(Dictionary<TK, TV> dictionary, Action<TV> callback)
+        public static void Each(IEnumerable<object> objectList, Action callback)
         {
-            Each(dictionary, (v, k, d) =>
+            foreach (object _ in objectList)
             {
-                callback(v);
-            });
-        }
-
-        public static void Each<TK, TV>(Dictionary<TK, TV> dictionary, Action callback)
-        {
-            Each(dictionary.Count, callback);
-        }
-
-        public static void Each<T>(List<T> list, Action<T, int, List<T>> callback)
-        {
-            int index = 0;
-
-            list.ForEach(value =>
-            {
-                callback(value, index, list);
-
-                index++;
-            });
-        }
-
-        public static void Each<T>(List<T> list, Action<T, int> callback)
-        {
-            Each(list, (v, i, a) =>
-            {
-                callback(v, i);
-            });
-        }
-
-        public static void Each<T>(List<T> list, Action<T> callback)
-        {
-            Each(list, (v, i, a) =>
-            {
-                callback(v);
-            });
-        }
-
-        public static void Each<T>(List<T> list, Action callback)
-        {
-            Each(list.Count, callback);
+                callback();
+            }
         }
     }
 }

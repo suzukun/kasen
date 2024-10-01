@@ -9,19 +9,19 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static KeyValuePair<TK, TV> Find<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, Dictionary<TK, TV>, bool> callback)
+        public static KeyValuePair<TK, TV> Find<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
         {
             KeyValuePair<TK, TV> result = default;
             bool isFinded = false;
 
-            Each(dictionary, (v, k, d) =>
+            Each(dictionary, (v, k) =>
             {
                 if (isFinded)
                 {
                     return;
                 }
 
-                bool isTarget = callback(v, k, d);
+                bool isTarget = callback(v, k);
 
                 if (isTarget)
                 {
@@ -33,29 +33,24 @@ namespace KasenCS
             return result;
         }
 
-        public static KeyValuePair<TK, TV> Find<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, TK, bool> callback)
+        public static KeyValuePair<TK, TV> Find<TK, TV>(IDictionary<TK, TV> dictionary, Func<TV, bool> callback)
         {
-            return Find(dictionary, (v, k, d) => callback(v, k));
+            return Find(dictionary, (v, k) => callback(v));
         }
 
-        public static KeyValuePair<TK, TV> Find<TK, TV>(Dictionary<TK, TV> dictionary, Func<TV, bool> callback)
-        {
-            return Find(dictionary, (v, k, d) => callback(v));
-        }
-
-        public static T Find<T>(List<T> list, Func<T, int, List<T>, bool> callback)
+        public static T Find<T>(IList<T> list, Func<T, int, bool> callback)
         {
             T result = default;
             bool isFinded = false;
 
-            Each(list, (v, i, a) =>
+            Each(list, (v, i) =>
             {
                 if (isFinded)
                 {
                     return;
                 }
 
-                bool isTarget = callback(v, i, a);
+                bool isTarget = callback(v, i);
 
                 if (isTarget)
                 {
@@ -67,14 +62,9 @@ namespace KasenCS
             return result;
         }
 
-        public static T Find<T>(List<T> list, Func<T, int, bool> callback)
+        public static T Find<T>(IList<T> list, Func<T, bool> callback)
         {
-            return Find(list, (v, i, a) => callback(v, i));
-        }
-
-        public static T Find<T>(List<T> list, Func<T, bool> callback)
-        {
-            return Find(list, (v, i, a) => callback(v));
+            return Find(list, (v, i) => callback(v));
         }
     }
 }

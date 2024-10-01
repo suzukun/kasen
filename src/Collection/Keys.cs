@@ -8,7 +8,7 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<TK> Keys<TK, TV>(Dictionary<TK, TV> dictionary)
+        public static List<TK> Keys<TK, TV>(IDictionary<TK, TV> dictionary)
         {
             TK[] keys = new TK[dictionary.Count];
 
@@ -17,7 +17,7 @@ namespace KasenCS
             return new List<TK>(keys);
         }
 
-        public static List<int> Keys<T>(List<T> list)
+        public static List<int> Keys<T>(IList<T> list)
         {
             return Range(list.Count);
         }

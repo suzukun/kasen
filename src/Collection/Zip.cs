@@ -8,9 +8,9 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<(T1, T2)> Zip<T1, T2>(List<T1> a, List<T2> b)
+        public static List<(T1, T2)> Zip<T1, T2>(IList<T1> a, IList<T2> b)
         {
-            List<(T1, T2)> result = new List<(T1, T2)>();
+            List<(T1, T2)> result = new();
 
             Each(a, (v, i) =>
             {
@@ -20,9 +20,9 @@ namespace KasenCS
             return result;
         }
 
-        public static List<(T1, T2)> Zip<T1, T2>((List<T1>, List<T2>) tuples)
+        public static List<(T1, T2)> Zip<T1, T2>((IList<T1>, IList<T2>) tuples)
         {
-            List<(T1, T2)> result = new List<(T1, T2)>();
+            List<(T1, T2)> result = new();
 
             Each(tuples.Item1, (v, i) =>
             {

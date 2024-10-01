@@ -8,9 +8,9 @@ namespace KasenCS
     /// </summary>
     public static partial class __
     {
-        public static List<T> Unique<T>(List<T> list)
+        public static List<T> Unique<T>(IList<T> list)
         {
-            List<T> result = new List<T>();
+            List<T> result = new();
 
             Each(list, v =>
             {
